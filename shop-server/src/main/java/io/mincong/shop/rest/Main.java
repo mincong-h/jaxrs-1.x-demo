@@ -15,10 +15,10 @@ public class Main {
     return UriBuilder.fromUri("http://localhost/api/").port(8080).build();
   }
 
-  private static final URI BASE_URI = getBaseURI();
+  static final URI BASE_URI = getBaseURI();
 
   @SuppressWarnings("unchecked")
-  private static HttpServer startServer() throws IOException {
+  static HttpServer startServer() throws IOException {
     ResourceConfig rc = new ApplicationAdapter(new ShopApplication());
     rc.getProperties().put("foo", "bar");
     rc.getContainerRequestFilters().add(new MyRequestFilter());
