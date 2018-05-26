@@ -3,9 +3,30 @@
 JAX-RS 1.x demo using Jersey. JAX-RS is the Java™ API for RESTful Web Services ([JSR 311][jsr-311]).
 Here's a demonstration using Jersey—the reference implementation of JAX-RS 1.x.
 
+## Prerequisite
+
+- Java 8 (Java 9+ won't work)
+- Maven 3
+- (optional) `jq` for JSON formatting
+
 ## Installation
 
-    mvn clean install
+Build application `shop` and run the server:
+
+    $ mvn clean install
+    $ mvn exec:java -f shop-server/pom.xml
+
+The server is now running on <http://localhost:8080/api/>.
+
+## Demo
+
+```
+$ curl -s http://localhost:8080/api/products/1 | jq
+{
+  "id": "1",
+  "name": "foo"
+}
+```
 
 ## Serialization
 
