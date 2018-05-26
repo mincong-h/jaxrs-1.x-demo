@@ -17,6 +17,7 @@
     <assertj.version>3.9.1</assertj.version>
     <jaxrs.version>1.1.1</jaxrs.version>
     <autoValue.version>1.2</autoValue.version>
+    <jackson.version>2.9.5</jackson.version>
 
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -77,9 +78,14 @@
         <version>${junit.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
         <groupId>com.fasterxml.jackson.jaxrs</groupId>
         <artifactId>jackson-jaxrs-json-provider</artifactId>
-        <version>2.9.5</version>
+        <version>${jackson.version}</version>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>

@@ -1,11 +1,11 @@
 package io.mincong.shop.rest;
 
-import javax.ws.rs.core.Response;
+import io.mincong.shop.rest.dto.Product;
 
 public class ProductResourceImpl implements ProductResource {
 
-  public Response getProduct(String id) {
-    return Response.ok().entity("{\"id\":\"" + id + "\",\"name\":\"foo\"}").build();
+  public Product getProduct(String id) {
+    return new Product(id, "foo");
   }
 
 }
