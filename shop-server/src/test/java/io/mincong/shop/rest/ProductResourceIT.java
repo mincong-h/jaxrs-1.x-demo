@@ -2,7 +2,11 @@ package io.mincong.shop.rest;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
 import io.mincong.shop.rest.dto.Product;
+import io.mincong.shop.rest.dto.ProductCreated;
+import javax.ws.rs.core.MediaType;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.After;
 import org.junit.Before;
@@ -24,7 +28,10 @@ public class ProductResourceIT {
   @Before
   public void setUp() throws Exception {
     server = Main.startServer();
-    wr = Client.create().resource(Main.BASE_URI.resolve("products"));
+
+    ClientConfig cc = new DefaultClientConfig();
+    cc.getSingletons().add(ShopApplication.newJacksonJsonProvider());
+    wr = Client.create(cc).resource(Main.BASE_URI.resolve("products"));
   }
 
   @After
@@ -42,5 +49,16 @@ public class ProductResourceIT {
   public void getProduct() {
     Product p = wr.path("123").get(Product.class);
     assertThat(p).isEqualTo(new Product("123", "foo"));
+  }
+
+  @Test
+  public void createProduct() {
+    Product p = new Product("123", "foo");
+    ProductCreated c =
+        wr.type(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+            .post(ProductCreated.class, p);
+    assertThat(c.getUrl()).endsWith(p.getId());
+    assertThat(c.getCreated()).isNotNull();
   }
 }
