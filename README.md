@@ -114,6 +114,56 @@ public class Product {
 }
 ```
 
+## Exception Mapping
+
+### Exception Mapping Server Side
+
+Implement class `ExceptionMapper` to handle the customized exception mapping.
+
+```java
+public class ShopExceptionMapper implements ExceptionMapper<ShopException> {
+  @Override
+  public Response toResponse(ShopException ex) {
+    ...
+  }
+}
+```
+
+Register the mapper as a singleton in your application:
+
+```java
+public class ShopApplication extends Application {
+  ...
+
+  @Override
+  public Set<Object> getSingletons() {
+    Set<Object> set = new HashSet<>();
+    set.add(new ShopExceptionMapper());
+    ...
+    return set;
+  }
+}
+```
+
+### Exception Mapping Client Side
+
+Use a proxy-client approach to map 4xx and 5xx HTTP responses into exception:
+
+```java
+WebResource wr = Client.create(cc).resource(Main.BASE_URI.resolve("products"));
+wr.addFilter(new ClientFilter() {
+  @Override
+  public ClientResponse handle(ClientRequest request) {
+    ClientResponse response = getNext().handle(request);
+    if (response.getStatus() >= 400) {
+      ShopExceptionData data = response.getEntity(ShopExceptionData.class);
+      throw new ShopException(response.getStatus(), data);
+    }
+    return response;
+  }
+});
+```
+
 ## References
 
 - [Baeldung: Jackson Annotation Examples][jackson-annotations]
