@@ -170,5 +170,5 @@ wr.addFilter(new ClientFilter() {
 
 [jsr-311]: https://jcp.org/en/jsr/detail?id=311
 [jackson-annotations]: http://www.baeldung.com/jackson-annotations
-[travis]: https://travis-ci.org/mincong-h/jaxrs-demo-1.x
-[travis-img]: https://travis-ci.org/mincong-h/jaxrs-demo-1.x.svg?branch=master
+[travis]: https://travis-ci.org/mincong-h/jaxrs-1.x-demo
+[travis-img]: https://travis-ci.org/mincong-h/jaxrs-1.x-demo.svg?branch=master
