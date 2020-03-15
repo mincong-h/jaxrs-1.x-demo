@@ -1,5 +1,7 @@
 # jaxrs-demo-1.x [![Build Status][travis-img]][travis]
 
+> See also: https://github.com/mincong-h/jaxrs-2.x-demo
+
 JAX-RS 1.x demo using Jersey. JAX-RS is the Java™ API for RESTful Web Services ([JSR 311][jsr-311]).
 Here's a demonstration using Jersey—the reference implementation of JAX-RS 1.x.
 
